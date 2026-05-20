@@ -1,36 +1,53 @@
 ﻿using System;
-
-namespace C__study_5_17
+using System.Diagnostics;
+namespace C__stduy_5_18
 {
-    class Test
-    {
-        private int _age;
-        public int Age
-        { 
-            get{ return _age; }
-            set {  _age = value; }
-        }
-    }
-
     internal class Program
     {
-        static void Main(string[] args)
+        static void OrderDelivery()
         {
+            Console.WriteLine("ordering delivery");
+        }
+        static async Task WaitDelivery()
+        {
+            Console.WriteLine("waiting delivery...");
+            await Task.Delay(5000);
+            Console.WriteLine("delivery arrived");
 
-            //Test t = new Test();
-            //t.show();
-            //int? i = null;
-            //int[] a = new int[10];
-            // int[] a = {1,2,3,4};
-            //Console.WriteLine( a.GetLength(1));
-            //int result = int.Parse(Console.ReadLine());
-            //Console.WriteLine(result);
-            
-            //foreach(var v in arr)
-            //{
-            //    Console.WriteLine(v);
-            //}
-           
+        }
+        static async Task EatDelivery()
+        {
+            Console.WriteLine("eat delivery...");
+            await Task.Delay(5000);
+
+            Console.WriteLine("finish eating");
+
+        }
+        static async Task LearnCsharp()
+        {
+            Console.WriteLine("learning C-sharp...");
+            await Task.Delay(10000);
+            Console.WriteLine("finish learning");
+
+        }
+
+        static async Task Main(string[] args)
+        {
+           var p= Stopwatch.StartNew();
+           OrderDelivery();
+            var waitingdelivery = WaitDelivery();
+            var learingCsharp = LearnCsharp();
+            await waitingdelivery;
+            await EatDelivery();
+            await learingCsharp;
+            //WaitDelivery();
+            //LearnCsharp();
+            //await WaitDelivery();
+            //await EatDelivery();
+            //await LearnCsharp();
+
+            p.Stop();
+            Console.WriteLine(p.Elapsed.TotalSeconds);
         }
     }
 }
